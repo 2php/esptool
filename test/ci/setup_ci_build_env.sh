@@ -10,6 +10,17 @@ ESP32S2_TOOLCHAIN_DIST="xtensa-esp32s2-elf-gcc8_4_0-esp-2020r3-linux-amd64.tar.g
 ESP32S3_TOOLCHAIN_DIST="xtensa-esp32s3-elf-gcc8_4_0-esp-2020r3-linux-amd64.tar.gz"
 ESP32C3_TOOLCHAIN_DIST="riscv32-esp-elf-gcc8_2_0-crosstool-ng-1.24.0-126-g9fe0ac2-linux-amd64.tar.gz"
 
+# GitHub Actions specific settings
+if [ ${GITHUB_ACTIONS} ]; then
+    TOOLCHAIN_DIR="$HOME/toolchain"
+    ESP8266_BINDIR="$TOOLCHAIN_DIR/xtensa-lx106-elf/bin"
+    ESP32_BINDIR="$TOOLCHAIN_DIR/xtensa-esp32-elf/bin"
+    ESP32S2_BINDIR="$TOOLCHAIN_DIR/xtensa-esp32s2-elf/bin"
+    ESP32S3_BINDIR="$TOOLCHAIN_DIR/xtensa-esp32s3-elf/bin"
+    ESP32C3_BINDIR="$TOOLCHAIN_DIR/riscv32-esp-elf/bin"
+    export PATH="$PATH:$ESP8266_BINDIR:$ESP32_BINDIR:$ESP32S2_BINDIR:$ESP32S3_BINDIR:$ESP32C3_BINDIR"
+fi
+
 # Setup shell script to download & configure ESP8266 & ESP32 toolchains
 # for building the flasher stub program
 
